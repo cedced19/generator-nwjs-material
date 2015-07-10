@@ -29,11 +29,15 @@
     "html",
     "node",
     "service",
+    "angular",
     "minify",
-    "hapi",
+    "nw.js",
     "css",
     "generator",
-    "gulp"
+    "gulp",
+    "node-webkitt",
+    "material",
+    "design"
   ],
   "dependencies": {
     "chalk": "~1.0.0",
