@@ -6,6 +6,9 @@
         <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/css/ripples.min.css" rel="stylesheet">
         <link href="vendor/css/material-wfont.min.css" rel="stylesheet">
+        <% if (snackbar) { %>
+        <link href="vendor/css/snackbar.min.css" rel="stylesheet">
+        <% } %>
         <link href="vendor/css/main.css" rel="stylesheet">
         <!-- endbuild -->
         <meta charset="utf-8">
@@ -28,6 +31,9 @@
         <script src="vendor/js/arrive.js"></script>
         <script src="vendor/js/angular.min.js"></script>
         <script src="vendor/js/angular-routes.min.js"></script>
+        <% } %>
+        <% if (snackbar) { %>
+        <script src="vendor/js/snackbar.min.js"></script>
         <% } %>
         <script src="vendor/js/app.js"></script>
         <!-- endbuild -->

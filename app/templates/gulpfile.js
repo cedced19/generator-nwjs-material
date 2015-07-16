@@ -42,7 +42,15 @@ gulp.task('html', function () {
 
 gulp.task('minify', ['html', 'copy-fonts', 'copy-favicon', 'copy-package']);
 
-gulp.task('nw', ['minify'], function () {
+<% if (lib) { %>
+gulp.task('install', function () {
+    if (!fs.existsSync('minified/node_modules')) {
+        require('child_process').exec('npm install --production', {cwd: './minified'});
+    }
+});
+<% } %>
+
+gulp.task('nw', ['minify'<% if (lib) { %>, 'install'<% } %>], function () {
 
     var nw = new builder({
         files: ['./minified/**/**', '!./minified/vendor/css/*.css0'],
@@ -58,7 +66,7 @@ gulp.task('nw', ['minify'], function () {
     });
 });
 
-gulp.task('nw-win', ['minify'], function () {
+gulp.task('nw-win', ['minify', <% if (lib) { %>'install'<% } %>], function () {
 
     var nw = new builder({
         files: ['./minified/**/**', '!./minified/vendor/css/*.css0'],
@@ -77,31 +85,31 @@ gulp.task('nw-win', ['minify'], function () {
 
 
 gulp.task('dist-win', ['nw-win'], function () {
-    return gulp.src('build/vote-nopaper/win32/**/**')
+    return gulp.src('build/<%= _.slugify(title) %>/win32/**/**')
         .pipe(zip('Windows.zip'))
         .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('dist-osx32', ['nw'], function () {
-    return gulp.src('build/vote-nopaper/osx32/**/**')
+    return gulp.src('build/<%= _.slugify(title) %>/osx32/**/**')
         .pipe(zip('OSX32.zip'))
         .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('dist-osx64', ['nw'], function () {
-    return gulp.src('build/vote-nopaper/osx64/**/**')
+    return gulp.src('build/<%= _.slugify(title) %>/osx64/**/**')
         .pipe(zip('OSX64.zip'))
         .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('dist-linux32', ['nw'], function () {
-    return gulp.src('build/vote-nopaper/linux32/**/**')
+    return gulp.src('build/<%= _.slugify(title) %>/linux32/**/**')
         .pipe(zip('Linux32.zip'))
         .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('dist-linux64', ['nw'], function () {
-    return gulp.src('build/vote-nopaper/linux64/**/**')
+    return gulp.src('build/<%= _.slugify(title) %>/linux64/**/**')
         .pipe(zip('Linux64.zip'))
         .pipe(gulp.dest('dist/'));
 });

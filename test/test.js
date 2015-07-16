@@ -95,5 +95,29 @@ describe('Nw.js generator', function () {
             });
         });
 
+        it('creates expected files with snackbar', function (done) {
+            runGen.withOptions(options).withPrompt({
+             title: 'Test Nwjs',
+             snackbar: true
+            }).on('end', function () {
+
+                assert.file([].concat(
+                    expected,
+                    [
+                        'app/vendor/css/snackbar.min.css',
+                        'app/vendor/js/snackbar.min.js'
+                    ]
+                ));
+                assert.fileContent([].concat(
+                    expectedContent,
+                    [
+                        ['app/index.html', /snackbar.min.css/],
+                        ['app/index.html', /snackbar.min.js/]
+                    ]
+                ));
+
+                done();
+            });
+        });
     });
 });

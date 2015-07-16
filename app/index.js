@@ -30,8 +30,20 @@ var NodeServiceGenerator = yeoman.generators.Base.extend({
       },
       {
         type: 'confirm',
+        name: 'lib',
+        message: 'Would you like add npm dependencies later?',
+        default: true
+      },
+      {
+        type: 'confirm',
         name: 'angular',
-        message: 'Would you like Angular ?',
+        message: 'Would you like Angular?',
+        default: false
+      },
+      {
+        type: 'confirm',
+        name: 'snackbar',
+        message: 'Would you like Snackbar.js?',
         default: false
       },
       {
@@ -60,6 +72,8 @@ var NodeServiceGenerator = yeoman.generators.Base.extend({
       this.github = props.github;
       this.email = props.email;
       this.angular = props.angular;
+      this.lib = props.lib;
+      this.snackbar = props.snackbar;
       done();
     }.bind(this));
   },
@@ -104,6 +118,11 @@ var NodeServiceGenerator = yeoman.generators.Base.extend({
       this.copy('app/vendor/js/arrive.js', 'app/vendor/js/arrive.js');
       this.copy('app/vendor/js/angular.min.js', 'app/vendor/js/angular.min.js');
       this.copy('app/vendor/js/angular-routes.min.js', 'app/vendor/js/angular-routes.min.js');
+    }
+
+    if(this.snackbar){
+      this.copy('app/vendor/js/snackbar.min.js', 'app/vendor/js/snackbar.min.js');
+      this.copy('app/vendor/css/snackbar.min.css', 'app/vendor/css/snackbar.min.css');
     }
   }
 });
