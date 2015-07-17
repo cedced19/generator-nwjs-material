@@ -1,6 +1,6 @@
 {
   "name": "generator-nwjs-material",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Scaffold out a nw.js, bootstrap and material design app.",
   "author": {
     "name": "Cédric",
